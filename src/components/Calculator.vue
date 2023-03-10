@@ -6,25 +6,25 @@
       <div id="current-operation">{{getResult}}</div>
     </div>
     <div id="buttons-container">
-      <button @click="clickC()">C</button>
+      <button @click="clickC()" id="zero-c-btn">C</button>
+      <button id="del-btn"><ion-icon name="backspace-outline" @click="clickDel()"></ion-icon></button>
       <button @click="click('÷')">÷</button>
-      <button @click="click('x')">x</button>
-      <button id="del-btn"><ion-icon name="backspace-outline"></ion-icon></button>
       <button class="number" @click="click('7')">7</button>
       <button class="number" @click="click('8')">8</button>
       <button class="number" @click="click('9')">9</button>
-      <button @click="click('-')">-</button>
+      <button @click="click('*')">x</button>
       <button class="number" @click="click('4')">4</button>
       <button class="number" @click="click('5')">5</button>
       <button class="number" @click="click('6')">6</button>
-      <button @click="click('+')">+</button>
+      <button @click="click('-')">-</button>
       <button class="number" @click="click('1')">1</button>
       <button class="number" @click="click('2')">2</button>
       <button class="number" @click="click('3')">3</button>
-      <button @click="click('%')">%</button>
-      <button class="number" id="zero-btn" @click="click('0')">0</button>
+      <button @click="click('+')">+</button>
+      <!-- <button @click="click('%')">%</button> -->
+      <button class="number" id="zero-c-btn" @click="click('0')">0</button>
       <button class="number" @click="click('.')">.</button>
-      <button id="equal-btn">=</button>
+      <button id="equal-btn" @click="clickResult()">=</button>
     </div>
   </div>
 </template>
@@ -43,28 +43,48 @@
     methods: {
       clickC() {
         this.getResult = '0';
+        this.getOperation = '';
+      },
+
+      clickDel() {
+        if (this.getResult.length > 1) {
+          this.getResult = this.getResult.substring(0, this.getResult.length - 1);
+        }
+        else {
+          this.getResult = '0';
+        }
       },
 
       click(number) {
         if(this.getResult == '0') {
-          this.getResult = number
+          this.getResult = number;
         }
         else {
-          this.getResult += number
+          this.getResult += number;
         }
+      },
+
+      clickResult() {
+        let operation = this.getResult;
+        this.getOperation = operation;
+
+        operation = operation.replace('x', '*');
+        operation = operation.replace('÷', '/');
+
+        this.getResult = eval(operation);
       }
     }
   }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
   }
 
   body {
@@ -150,8 +170,16 @@
     background-color: #2b2b2b;
   }
 
+  #buttons-container .number:hover:active {
+    background-color: #282828;
+  }
+
   #buttons-container button:hover {
     background-color: #3b3b3b;
+  }
+
+  #buttons-container button:hover:active {
+    background-color: #2b2b2b;
   }
 
   #buttons-container #del-btn ion-icon{
@@ -161,7 +189,7 @@
     margin: 0 auto;
   }
 
-  #buttons-container #zero-btn {
+  #buttons-container #zero-c-btn {
     grid-column: span 2;
   }
 
