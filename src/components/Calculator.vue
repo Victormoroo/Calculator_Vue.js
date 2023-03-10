@@ -166,7 +166,8 @@
     background-color: #3b3b3b;
   }
 
-  #buttons-container .number:hover {
+  #buttons-container .number:hover,
+  #buttons-container button:hover:active {
     background-color: #2b2b2b;
   }
 
@@ -176,10 +177,6 @@
 
   #buttons-container button:hover {
     background-color: #3b3b3b;
-  }
-
-  #buttons-container button:hover:active {
-    background-color: #2b2b2b;
   }
 
   #buttons-container #del-btn ion-icon{
@@ -193,8 +190,9 @@
     grid-column: span 2;
   }
 
-  #buttons-container #equal-btn {
-    background-color: #76b9ed;
+  #buttons-container #equal-btn,
+  #buttons-container #equal-btn:hover:active {
+    background-color: #3c90d4;
   }
 
   #buttons-container #equal-btn:hover {
