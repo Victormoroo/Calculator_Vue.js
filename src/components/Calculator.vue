@@ -147,7 +147,7 @@
   #buttons-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3px
+    gap: 3px;
   }
 
   #buttons-container button {
